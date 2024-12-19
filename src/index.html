@@ -6,6 +6,35 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <script type="module">
+    import { IDPaySDK } from "idpay-b2b-sdk";
+    IDPaySDK.init({
+      type: 'IFRAME'
+      //,env: 'uat' // It will only be filled in if it is a test environment.
+    });
+  </script>
+  <script>
+      function antifraude(){
+        const transactionId = '9bc22bac-1e64-49a5-94d6-9e4f8ec9a1bf';
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
+
+        const transaction = {
+          id: '9bc22bac-1e64-49a5-94d6-9e4f8ec9a1bf',
+          concluded: true,
+          captureConcluded: true
+        };
+
+        const onFinish = (transaction, type) => {
+          console.log('response', transaction, type);
+        }
+
+        IDPaySDK.open({
+          transactionId,
+          token,
+          onFinish
+        });
+    }
+  </script>
 </head>
 <body>
   <app-root></app-root>
